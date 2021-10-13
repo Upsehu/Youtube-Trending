@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+<style>
+    *{
+        font-family: 'Roboto', sans-serif;
+    }
+
+    nav{
+        height: 50px;
+    }
+    img{
+        height: 100%;
+        width: 100%;
+    }
+    #query-image{
+        /* vertical-align: center; */
+        /* height: px; */
+        /* margin-top: 10px; */
+        width: 30px;
+        /* height: 30px; */
+    }
+    /* #button-div{
+        background-color: white;
+    } */
+    .inline{
+        display: inline-block;
+    }
+    h1{
+        font-size: 35px;
+    }
+    #show{
+        width: 80%;
+        display: grid;
+        grid-gap: 10px;
+    }
+    #show > div{
+        /* height: 10px; */
+        width: 100px;
+    }
+    #img-box{
+        height: 20px;
+
+    }
+    #brand{
+        vertical-align: center;
+        margin-left: 2%;
+        width: 20%;
+    }
+    h2{
+        margin-top: 10px;
+    }
+    hr{
+        background-color: grey;   
+    }
+    #input-box{
+        vertical-align: center;
+        width: 60%;
+        
+    }
+    input{
+        width: 50%;
+        padding: 10px 10px;
+        /* line-height: 15px; */
+        /* height: 15px; */
+    }
+    #button-div{
+        /* margin-top: 15px; */
+        /* justify-content: center; */
+        vertical-align: center;
+    }
+    #search-input{
+        width: 70%;
+        margin-right: 2.3%;
+    }
+    input{
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+    <nav>
+        <div id='nav-bar'>
+            <div id="brand" class='inline'>
+                <div id='img-box' class='inline'>
+                    <img src="https://1000logos.net/wp-content/uploads/2017/05/New-YouTube-logo.jpg" alt="">
+                </div>
+               <div class="inline"> <h2>YouTube</h2></div>
+            </div>
+
+            <div id="input-box" class='inline'>
+                <div id='search-input' class='inline'>
+                    <input type="text" placeholder="Search" id='query'>
+                </div>
+                <!-- <div id='button-div'> -->
+                    <div id='button-div' class="inline">
+                        <button onclick='search()'><div  id = 'query-image'><img src="https://th.bing.com/th/id/OIP.9PaOA7uFG6INsf9WhAJoKgHaHa?pid=ImgDet&rs=1" alt=""></div></button>
+                    </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </nav>
+    <hr>
+
+    <div id="show">
+
+    </div>
+
+</body>
+</html>
+
+<script>
+
+    let showBox = document.getElementById('show')
+
+    async function search(){
+        let query = document.getElementById('query');
+
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=bhau&type=video&key=AIzaSyCvyfG248BrFa4T1r4PHhiW6xcjBgQzUU0&maxResults=5`);
+
+        let data = await res.json();
+        console.log(data);
+        console.log(data.items);
+        appendVideos(data.items);
+    }
+
+    search();
+
+    function appendVideos(movies){
+
+        showBox.innerHTML = null;
+
+        movies.forEach(({id: {videoId}}) => {
+            console.log(videoId);
+            let div = document.createElement('div');
+
+            div.innerHTML = `<iframe width="400" height="250" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
+            showBox.append(div);
+        });
+    }
+    
+</script>
