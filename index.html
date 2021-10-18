@@ -92,6 +92,18 @@
     input{
         width: 100%;
     }
+    #signIn{
+        padding: 10px;
+        /* background-color: blue; */
+        border: 1px solid blue;
+        color: blue;
+        background-color: white;
+        /* margin-left: 20%; */
+    }
+    #signIn-div{
+        /* border: 1px solid black; */
+        margin-left: 10%;
+    }
 </style>
 </head>
 <body>
@@ -102,6 +114,7 @@
                     <img src="https://1000logos.net/wp-content/uploads/2017/05/New-YouTube-logo.jpg" alt="">
                 </div>
                <div class="inline"> <h2>YouTube</h2></div>
+               
             </div>
 
             <div id="input-box" class='inline'>
@@ -113,6 +126,9 @@
                         <button onclick='search()'><div  id = 'query-image'><img src="https://th.bing.com/th/id/OIP.9PaOA7uFG6INsf9WhAJoKgHaHa?pid=ImgDet&rs=1" alt=""></div></button>
                     </div>
                 <!-- </div> -->
+            </div>
+            <div class="inline" id='signIn-div'>
+                <button onclick='signIn()' id='signIn'>SIGN IN</button>
             </div>
         </div>
         <hr>
@@ -163,5 +179,10 @@
     brand.addEventListener('click', function(){
         window.location.href = '/index.html';
     })
+
+
+    function signIn(){
+        window.location.href = '/signin.html';
+    }
     
 </script>
